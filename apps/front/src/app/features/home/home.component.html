@@ -1,0 +1,15 @@
+<div class="p-24">
+<div class="flex flex-col m-auto">
+  <form class="flex flex-col example-form">
+    <mat-form-field>
+      <mat-label>PC à démarrer</mat-label>
+      <mat-select [(ngModel)]="selectedPC" [ngModelOptions]="{standalone: true}">
+        @for (hardware of hardware$ | async; track hardware.id) {
+          <mat-option [value]="hardware">{{hardware.label}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <button mat-raised-button (click)="powerOn()">Allumage</button>
+</div>
+</div>

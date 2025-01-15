@@ -1,0 +1,11 @@
+# curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json"
+POST {{base_url}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "kilsica",
+  "password": "panda-roux"
+}
+
+###
+

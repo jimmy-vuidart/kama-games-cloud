@@ -1,0 +1,6 @@
+{
+  "name": "@kilsi-world/shared",
+  "exports": {
+    ".": "./src/public_api.ts"
+  }
+}
