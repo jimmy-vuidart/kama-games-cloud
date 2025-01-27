@@ -6,6 +6,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { Hardware } from '@kilsi-world/shared';
 import { Observable } from 'rxjs';
+import { PanelComponent } from '../../shared/components/panel/panel.component';
 import { KamaWorldService } from '../../shared/services/kama-world.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { KamaWorldService } from '../../shared/services/kama-world.service';
     AsyncPipe,
     MatOption,
     FormsModule,
+    PanelComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
