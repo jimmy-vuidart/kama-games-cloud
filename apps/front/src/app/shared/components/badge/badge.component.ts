@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 
 export enum Status {
   NORMAL,
+  LOADING,
   INFO,
   SUCCESS,
   WARNING,

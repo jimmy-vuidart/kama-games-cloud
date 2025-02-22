@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { wake } from 'wake_on_lan';
-import { HARDWARE } from '../../data/hardware';
+import { HARDWARE } from '../../data/hardware.constant';
 
 @Injectable()
 export class HardwareService {

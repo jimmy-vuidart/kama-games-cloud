@@ -3,7 +3,7 @@ import { AlexaIntents, AlexaPayload, RequestType } from '../../shared/models/ale
 import { AlexaResponse, OutputSpeechType, PlayBehavior } from '../../shared/models/alexa-response';
 import { HardwareService } from '../hardware/hardware.service';
 import { firstValueFrom } from 'rxjs';
-import { HardwareId } from '../../data/hardware';
+import { HardwareId } from '../../data/hardware.constant';
 
 @Controller('alexa')
 export class AlexaController {

@@ -1,5 +1,5 @@
 
 export const environment = {
-  apiUrl: 'https://localhost:3000',
+  apiUrl: 'http://localhost:3000/kilsiworld/api',
   controlTowerUrl: 'http://localhost:4000',
 }

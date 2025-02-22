@@ -1,6 +1,6 @@
 import { Controller, Get, HttpCode, Param } from '@nestjs/common';
 import { HardwareService } from './hardware.service';
-import { HARDWARE, HardwareId } from '../../data/hardware';
+import { HARDWARE, HardwareId } from '../../data/hardware.constant';
 
 @Controller('hardware')
 export class HardwareController {

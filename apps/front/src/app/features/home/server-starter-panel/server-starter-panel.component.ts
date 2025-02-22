@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
-import { Hardware } from '@kilsi-world/shared';
-import { map, Observable, switchMap } from 'rxjs';
+import { Component, inject, input, resource } from '@angular/core';
+import { Hardware } from '@kilsi-world/shared/hardware';
+import { first, firstValueFrom, map, Observable, switchMap } from 'rxjs';
 import { BadgeComponent, Status } from '../../../shared/components/badge/badge.component';
 import { PanelComponent } from '../../../shared/components/panel/panel.component';
-import { KamaWorldService } from '../../../shared/services/kama-world.service';
+import { HardwareService } from '../../../shared/services/hardware.service';
 
 @Component({
   selector: 'server-starter-panel',
@@ -15,17 +15,21 @@ import { KamaWorldService } from '../../../shared/services/kama-world.service';
   styleUrl: './server-starter-panel.component.scss',
 })
 export class ServerStarterPanelComponent {
-  kamaWorldService = inject(KamaWorldService);
+  hardwareService = inject(HardwareService);
 
-  hardware$: Observable<Hardware[]> = this.kamaWorldService.getPCs();
-  defaultHardware$: Observable<Hardware> = this.hardware$.pipe(map((hardware: Hardware[]) => hardware[0]));
+  hardware = input.required<Hardware>();
+
+  status = resource({
+    request: () => ({ hardware: this.hardware() }),
+    loader: ({ request }) => firstValueFrom(this.hardwareService.checkHealth(request.hardware)),
+    defaultValue: Status.LOADING,
+  });
 
   protected readonly Status = Status;
 
   startServer() {
-
-    this.defaultHardware$.pipe(
-      switchMap((hardware: Hardware) => this.kamaWorldService.wakeUpPC(hardware.id)),
-    ).subscribe();
+    // this.defaultHardware$.pipe(
+    //   switchMap((hardware: Hardware) => this.kamaWorldService.wakeUp(hardware.id)),
+    // ).subscribe();
   }
 }

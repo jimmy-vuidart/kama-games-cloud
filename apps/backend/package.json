@@ -32,7 +32,8 @@
     "rxjs": "^7.8.1",
     "ssh2": "^1.16.0",
     "tsx": "^4.19.2",
-    "wake_on_lan": "^1.0.0"
+    "wake_on_lan": "^1.0.0",
+    "@kilsi-world/shared": "*"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.4.5",

@@ -1,9 +1,7 @@
 <div class="flex flex-col justify-center space-y-4">
-  <server-starter-panel></server-starter-panel>
-</div>
-
-<div>
-  <badge [status]="Status.SUCCESS">LOL</badge>
-  <badge [status]="Status.INFO">LOL</badge>
-  <badge [status]="Status.DANGER">LOL</badge>
+  @for (hardware of hardware$ | async; track hardware.id) {
+    <server-starter-panel
+      [hardware]="hardware"
+    ></server-starter-panel>
+  }
 </div>

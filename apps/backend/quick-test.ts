@@ -1,5 +1,5 @@
 import { wake } from 'wake_on_lan';
-import { HARDWARE, HardwareId } from './src/data/hardware';
+import { HARDWARE, HardwareId } from './src/data/hardware.constant';
 
 // wake(yuna, (error: any) => {
 //   console.log('Wakie wakie');

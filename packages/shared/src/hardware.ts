@@ -3,4 +3,5 @@ export interface Hardware {
   label: string;
   macAddress: string;
   ipAddress: string;
+  controlTowerAddress: string;
 }
