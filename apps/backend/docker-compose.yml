@@ -1,0 +1,14 @@
+version: "2"
+services:
+  kilsiworld-backend:
+    image: "kilsiworld-backend"
+    user: "node"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/share/homes/tidiusff/Storage/Applications/Kilsiworld/backend
+      - ./ssl:/share/homes/tidiusff/Storage/
+    expose:
+      - "3000"
+    ports: # use if it is necessary to expose the container to the host machine
+      - "3000:3000"

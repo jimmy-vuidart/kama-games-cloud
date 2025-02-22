@@ -4,23 +4,31 @@ import { readFileSync } from 'fs';
 import { Client, ScpClient } from 'node-scp';
 import { homedir } from 'os';
 
+// let remotePath = '/home/tidiusff/server';
+let remotePath = '/share/CACHEDEV1_DATA/Applications/Kilsiworld/Backend';
+
 Client({
-  host: 'raspberrypi.local',
+  host: 'KAMA-NAS',
   port: 22,
   username: 'tidiusff',
   privateKey: readFileSync(`${homedir()}/.ssh/id_rsa`),
 }).then(async (client) => {
   console.log('Client connected');
 
-  await executeCommand(client, 'sudo systemctl stop kilsi-world');
+  // await executeCommand(client, 'sudo systemctl stop kilsi-world');
+  try {
+    await client.rmdir(`${remotePath}/dist`);
+  } catch (err) {
+    console.log('No folder to remove');
+  }
 
-  await client.rmdir('/home/tidiusff/server/dist');
+  await client.uploadDir('./dist', `${remotePath}/dist`);
+  await client.uploadFile('./package.json', `${remotePath}/package.json`);
+  await client.uploadFile('./.env', `${remotePath}/.env`);
+  await client.uploadFile('./Dockerfile', `${remotePath}/Dockerfile`);
 
-  await client.uploadDir('./dist', '/home/tidiusff/server/dist');
-  await client.uploadFile('./package.json', '/home/tidiusff/server/package.json');
-  await client.uploadFile('./.env', '/home/tidiusff/server/.env');
-
-  await executeCommand(client, 'sudo systemctl start kilsi-world');
+  // await executeCommand(client, 'sudo systemctl start kilsi-world');
+  await executeCommand(client, 'npm i --omit dev');
 
   console.log('Upload successful');
 

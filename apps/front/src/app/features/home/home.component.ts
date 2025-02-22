@@ -1,39 +1,28 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatOption, MatSelect } from '@angular/material/select';
 import { Hardware } from '@kilsi-world/shared';
 import { Observable } from 'rxjs';
+import { BadgeComponent, Status } from '../../shared/components/badge/badge.component';
 import { PanelComponent } from '../../shared/components/panel/panel.component';
 import { KamaWorldService } from '../../shared/services/kama-world.service';
+import { ServerStarterPanelComponent } from './server-starter-panel/server-starter-panel.component';
 
 @Component({
   selector: 'app-home',
   imports: [
-    MatButton,
-    MatFormField,
-    MatLabel,
-    MatSelect,
     AsyncPipe,
-    MatOption,
     FormsModule,
     PanelComponent,
+    BadgeComponent,
+    ServerStarterPanelComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  kamaWorldService = inject(KamaWorldService);
-
-  hardware$: Observable<Hardware[]> = this.kamaWorldService.getPCs();
-
-  selectedPC?: Hardware;
+  protected readonly Status = Status;
 
   powerOn() {
-    if (this.selectedPC) {
-      this.kamaWorldService.wakeUpPC(this.selectedPC.id).subscribe();
-    }
   }
 }

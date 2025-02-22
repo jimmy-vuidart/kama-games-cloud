@@ -1,0 +1,15 @@
+version: '3'
+services:
+  kilsiworld-backend:
+    image: kilsiworld-backend
+    container_name: kilsiworld-backend
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: kilsiworld-nginx
+    container_name: kilsiworld-nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - kilsiworld-backend

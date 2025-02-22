@@ -1,0 +1,11 @@
+<panel [loading]="false">
+  <div class="flex flex-col place-items-center">
+    <div class="text-4xl">
+      Etat du serveur :
+      <badge [status]="Status.DANGER">Eteint</badge>
+    </div>
+    <div>
+      <button (click)="startServer()" class="button">Tenter un démarrage</button>
+    </div>
+  </div>
+</panel>

@@ -4,6 +4,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BackupModule } from './features/backup/backup.module';
+import { HealthModule } from './features/health/health.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { BackupModule } from './features/backup/backup.module';
     }),
 
     BackupModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
