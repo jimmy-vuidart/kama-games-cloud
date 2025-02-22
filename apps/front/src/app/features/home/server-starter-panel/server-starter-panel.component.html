@@ -1,12 +1,14 @@
 <panel [loading]="status.isLoading()">
   <div class="flex flex-col place-items-center">
     <div class="text-5xl">{{ hardware().label }}</div>
-    <div class="text-4xl">
+    <div class="text-3xl">
       Etat du serveur :
-      <badge [status]="status.value()">Eteint</badge>
+      <server-status-badge [status]="status.value()" />
     </div>
-    <div>
-      <button (click)="startServer()" class="button">Tenter un démarrage</button>
-    </div>
+    @if (status.value() !== Status.SUCCESS) {
+      <div>
+        <button (click)="startServer()" class="button">Tenter un démarrage</button>
+      </div>
+    }
   </div>
 </panel>

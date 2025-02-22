@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Hardware } from '@kilsi-world/shared/hardware';
-import { map, Observable } from 'rxjs';
+import { catchError, delay, filter, interval, map, Observable, of, retry, switchMap, take, throwError, timer } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Status } from '../components/badge/badge.component';
 
@@ -25,6 +25,26 @@ export class HardwareService {
 
   checkHealth(hardware: Hardware) {
     return this.http.get<{ up: boolean }>(`http://${hardware.controlTowerAddress}/health`)
-      .pipe(map(data => data.up ? Status.SUCCESS : Status.DANGER));
+      .pipe(
+        map(data => data.up ? Status.SUCCESS : Status.DANGER),
+        catchError(err => of(Status.DANGER)),
+      );
+  }
+
+  longCheckHealth(hardware: Hardware) {
+    let attempts = 0;
+    return this.checkHealth(hardware).pipe(
+      switchMap(status => {
+        if (status === Status.SUCCESS) {
+          return of(status);
+        } else {
+          return timer(1000).pipe(map(() => {
+            throw new Error('No health success');
+          }));
+        }
+      }),
+      retry(10),
+      catchError(err => of(Status.DANGER)),
+    );
   }
 }

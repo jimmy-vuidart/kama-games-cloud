@@ -1,0 +1,9 @@
+<badge [status]="status()">
+  @if (status() === Status.DANGER) {
+    Eteint
+  } @else if (status() === Status.SUCCESS) {
+    Allumé
+  } @else {
+    Chargement...
+  }
+</badge>

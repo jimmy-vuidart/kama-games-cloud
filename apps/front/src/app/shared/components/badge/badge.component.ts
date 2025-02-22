@@ -22,6 +22,7 @@ export class BadgeComponent {
   selectedClass: string = '';
   private readonly COLORS: Record<Status, string> = {
     [Status.NORMAL]: 'text-gray-600 ring-gray-500/10',
+    [Status.LOADING]: 'text-gray-600 ring-gray-500/10',
     [Status.WARNING]: 'text-yellow-800 ring-yellow-600/20',
     [Status.DANGER]: 'text-red-700 ring-red-600/10',
     [Status.INFO]: 'text-blue-700 ring-blue-700/10',
