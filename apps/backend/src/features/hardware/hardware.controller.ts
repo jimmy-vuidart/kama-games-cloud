@@ -16,4 +16,9 @@ export class HardwareController {
   wakeUp(@Param('id') id: HardwareId) {
     return this.hardwareService.wakeUp(id);
   }
+
+  @Get('health/:id')
+  healthCheck(@Param('id') id: HardwareId) {
+    return this.hardwareService.healthCheck(id);
+  }
 }

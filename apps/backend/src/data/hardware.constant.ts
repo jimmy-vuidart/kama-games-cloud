@@ -1,4 +1,4 @@
-import { Hardware } from '@kilsi-world/shared/dist';
+import { Hardware } from '../shared/models/hardware';
 
 export enum HardwareId {
   KILSICA = 'kilsi',

@@ -24,7 +24,7 @@ export class HardwareService {
   }
 
   checkHealth(hardware: Hardware) {
-    return this.http.get<{ up: boolean }>(`http://${hardware.controlTowerAddress}/health`)
+    return this.http.get<{ up: boolean }>(`${this.apiUrl}/health/${hardware.id}`)
       .pipe(
         map(data => data.up ? Status.SUCCESS : Status.DANGER),
         catchError(err => of(Status.DANGER)),

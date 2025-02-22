@@ -1,11 +1,16 @@
+import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { wake } from 'wake_on_lan';
-import { HARDWARE } from '../../data/hardware.constant';
+import { HARDWARE, HardwareId } from '../../data/hardware.constant';
+import { Hardware } from '../../shared/models/hardware';
 
 @Injectable()
 export class HardwareService {
   private readonly logger = new Logger(HardwareService.name);
+
+  constructor(private httpService: HttpService) {
+  }
 
   getHello(): any {
     return { result: 'Hello World de gauche!' };
@@ -39,5 +44,12 @@ export class HardwareService {
         subscriber.complete();
       }
     });
+  }
+
+  healthCheck(id: HardwareId) {
+    const hardware: Hardware | undefined = HARDWARE.find((hardware) => hardware.id === id);
+    if (hardware) {
+      return this.httpService.get<{ up: true }>(`http://${hardware.controlTowerAddress}/health`).pipe(map(data => data.data));
+    }
   }
 }
