@@ -15,7 +15,6 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/jest/bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build": "nest build",
-    "deploy": "tsx deploy.ts",
     "release": "npm run build && npm run deploy",
     "quick": "tsx quick-test.ts"
   },

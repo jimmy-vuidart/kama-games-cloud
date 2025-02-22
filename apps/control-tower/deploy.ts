@@ -5,12 +5,12 @@ import { Client, ScpClient } from 'node-scp';
 import { homedir } from 'os';
 
 // let remotePath = '/home/tidiusff/server';
-let remotePath = '/share/CACHEDEV1_DATA/Applications/Kilsiworld/Backend';
+let remotePath = 'C:/Servers/ControlTower';
 
 Client({
-  host: 'KAMA-NAS',
+  host: 'kilsica.duckdns.org',
   port: 22,
-  username: 'tidiusff',
+  username: 'Kilsica',
   privateKey: readFileSync(`${homedir()}/.ssh/id_rsa`),
 }).then(async (client) => {
   console.log('Client connected');
@@ -25,10 +25,9 @@ Client({
   await client.uploadDir('./dist', `${remotePath}/dist`);
   await client.uploadFile('./package.json', `${remotePath}/package.json`);
   await client.uploadFile('./.env', `${remotePath}/.env`);
-  await client.uploadFile('./Dockerfile', `${remotePath}/Dockerfile`);
 
   // await executeCommand(client, 'sudo systemctl start kilsi-world');
-  await executeCommand(client, 'npm i --omit dev');
+  await executeCommand(client, 'pm2 restart kilsiworld-control-tower');
 
   console.log('Upload successful');
 
