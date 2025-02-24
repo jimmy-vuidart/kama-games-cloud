@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href=/kilsiworld/",
     "deploy": "ng deploy",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "watch": "ng build --watch --configuration development",

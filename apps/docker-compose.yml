@@ -1,17 +1,33 @@
 services:
   kilsiworld-backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
     image: kilsiworld-backend
     container_name: kilsiworld-backend
+    ports:
+      - "5000:5000"
+
+  kilsiworld-front:
+    build:
+      dockerfile: Dockerfile
+      context: ./front
+    image: kilsiworld-front
+    container_name: kilsiworld-front
     ports:
       - "3000:3000"
 
   nginx:
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
     image: kilsiworld-nginx
     container_name: kilsiworld-nginx
     ports:
       - "80:80"
       - "4000:4000"
     depends_on:
+      - kilsiworld-front
       - kilsiworld-backend
     volumes:
       - certbot-etc:/etc/letsencrypt
