@@ -1,0 +1,38 @@
+## Étape de build
+FROM node:20 AS base
+
+# Generate a partial monorepo with a pruned lockfile for a target workspace.
+FROM base as turbo
+RUN npm install turbo -g
+WORKDIR /app
+ARG APP
+COPY . .
+RUN turbo prune --docker $APP
+
+# Installing dependencies separately, then builiding the app
+FROM base as builder
+WORKDIR /app
+
+RUN npm install turbo -g
+
+COPY --from=turbo /app/out/json .
+RUN npm install
+
+COPY --from=turbo /app/out/full .
+RUN turbo run build
+
+
+## Etape de production
+FROM busybox:1.35
+# Create a non-root user to own the files and run our server
+RUN adduser -D static
+USER static
+WORKDIR /home/static
+ARG DIST
+
+# Copy the static website
+# Use the .dockerignore file to control what ends up inside the image!
+COPY --from=builder /app/$DIST/browser .
+
+# Run BusyBox httpd
+CMD ["busybox", "httpd", "-f", "-v", "-p", "5000"]

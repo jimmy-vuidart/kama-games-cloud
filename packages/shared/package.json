@@ -4,10 +4,6 @@
     "build": "tsc --build",
     "dev": "tsc --watch"
   },
-  "exports": {
-    "./*": {
-      "types": "./src/*.ts",
-      "default": "./dist/*.js"
-    }
-  }
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
 }

@@ -1,9 +1,9 @@
+import { Hardware } from '@kilsi-world/shared';
 import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { wake } from 'wake_on_lan';
 import { HARDWARE, HardwareId } from '../../data/hardware.constant';
-import { Hardware } from '../../shared/models/hardware';
 
 @Injectable()
 export class HardwareService {

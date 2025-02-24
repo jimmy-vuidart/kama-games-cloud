@@ -1,5 +1,5 @@
 import { Component, inject, input, resource } from '@angular/core';
-import { Hardware } from '@kilsi-world/shared/hardware';
+import { Hardware } from '@kilsi-world/shared';
 import { firstValueFrom, tap } from 'rxjs';
 import { Status } from '../../../shared/components/badge/badge.component';
 import { PanelComponent } from '../../../shared/components/panel/panel.component';

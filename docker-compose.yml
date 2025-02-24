@@ -1,26 +1,30 @@
 services:
-  kilsiworld-backend:
-    build:
-      dockerfile: Dockerfile
-      context: ./backend
-    image: kilsiworld-backend
-    container_name: kilsiworld-backend
-    ports:
-      - "5000:5000"
 
   kilsiworld-front:
     build:
-      dockerfile: Dockerfile
-      context: ./front
+      dockerfile: packages/docker/Dockerfile.angular
+      context: .
+      args:
+        APP: "@kilsi-world/front"
+        DIST: "apps/front/dist/kilsi-world"
     image: kilsiworld-front
     container_name: kilsiworld-front
     ports:
       - "3000:3000"
 
-  nginx:
+  #  kilsiworld-backend:
+  #    build:
+  #      dockerfile: packages/docker/Dockerfile.nest
+  #      context: .
+  #    image: kilsiworld-backend
+  #    container_name: kilsiworld-backend
+  #    ports:
+  #      - "5000:5000"
+
+  kilsiworld-nginx:
     build:
-      dockerfile: Dockerfile
-      context: ./nginx
+      dockerfile: apps/nginx/Dockerfile
+      context: .
     image: kilsiworld-nginx
     container_name: kilsiworld-nginx
     ports:
@@ -28,7 +32,7 @@ services:
       - "4000:4000"
     depends_on:
       - kilsiworld-front
-      - kilsiworld-backend
+    #      - kilsiworld-backend
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-www:/var/www/certbot
@@ -39,6 +43,7 @@ services:
 #    volumes:
 #      - certbot-etc:/etc/letsencrypt
 #      - certbot-www:/var/www/certbot
+#    entrypoint: "/bin/sh -c 'certbot certonly --webroot --webroot-path=/var/www/certbot --email tidiusff@gmail.com --agree-tos --no-eff-email -d kamalen.duckdns.org'"
 #    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --force-renewal; sleep 12h & wait $${!}; done;'"
 
 volumes:

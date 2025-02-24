@@ -2,4 +2,4 @@
 FROM nginx:latest
 
 # Copier le fichier de configuration personnalisé
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY apps/nginx/nginx.conf /etc/nginx/nginx.conf
