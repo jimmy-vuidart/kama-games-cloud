@@ -15,7 +15,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/jest/bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build": "nest build",
-    "quick": "tsx quick-test.ts"
+    "quick": "tsx quick-start.ts"
   },
   "engines": {
     "npm": ">=8.0.0",

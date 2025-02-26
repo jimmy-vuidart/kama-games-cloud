@@ -1,3 +1,4 @@
+name: kilsiworld
 services:
 
   kilsiworld-front:
@@ -12,14 +13,14 @@ services:
     ports:
       - "3000:3000"
 
-  #  kilsiworld-backend:
-  #    build:
-  #      dockerfile: packages/docker/Dockerfile.nest
-  #      context: .
-  #    image: kilsiworld-backend
-  #    container_name: kilsiworld-backend
-  #    ports:
-  #      - "5000:5000"
+  kilsiworld-backend:
+    build:
+      dockerfile: apps/backend/Dockerfile
+      context: ./apps/backend/
+    image: kilsiworld-backend
+    container_name: kilsiworld-backend
+    ports:
+      - "5000:5000"
 
   kilsiworld-nginx:
     build:
