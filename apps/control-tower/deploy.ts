@@ -15,7 +15,7 @@ Client({
 }).then(async (client) => {
   console.log('Client connected');
 
-  // await executeCommand(client, 'sudo systemctl stop kilsi-world');
+  // await executeCommand(client, 'sudo systemctl stop kama-games-cloud');
   try {
     await client.rmdir(`${remotePath}/dist`);
   } catch (err) {
@@ -26,8 +26,8 @@ Client({
   await client.uploadFile('./package.json', `${remotePath}/package.json`);
   await client.uploadFile('./.env', `${remotePath}/.env`);
 
-  // await executeCommand(client, 'sudo systemctl start kilsi-world');
-  await executeCommand(client, 'pm2 restart kilsiworld-control-tower');
+  // await executeCommand(client, 'sudo systemctl start kama-games-cloud');
+  await executeCommand(client, 'pm2 restart kama-games-cloud-control-tower');
 
   console.log('Upload successful');
 

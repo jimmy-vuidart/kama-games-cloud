@@ -56,7 +56,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 ## Access
 
-https://kamalen.github.io/kilsi-world-front/
+https://kamalen.github.io/kama-games-cloud-front/
 
 ## Additional Resources
 

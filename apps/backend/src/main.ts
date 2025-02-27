@@ -15,7 +15,7 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule, config);
   app.enableCors();
-  // app.setGlobalPrefix('kilsiworld/api');
+  // app.setGlobalPrefix('kama-games-cloud/api');
   await app.listen(process.env.PORT || 3000);
 }
 

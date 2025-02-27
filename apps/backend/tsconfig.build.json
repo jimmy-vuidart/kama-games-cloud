@@ -6,6 +6,6 @@
     "test",
     "**/*spec.ts",
     "deploy.ts",
-    "quick-test.ts"
+    "quick-start.ts"
   ]
 }

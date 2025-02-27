@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Hardware } from '@kilsi-world/shared';
+import { Hardware } from '@kama-games-cloud/shared';
 import { catchError, delay, filter, interval, map, Observable, of, retry, switchMap, take, throwError, timer } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Status } from '../components/badge/badge.component';

@@ -1,4 +1,4 @@
-import { Hardware } from '@kilsi-world/shared';
+import { Hardware } from '@kama-games-cloud/shared';
 import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { map, Observable } from 'rxjs';

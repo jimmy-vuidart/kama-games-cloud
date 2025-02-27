@@ -15,7 +15,7 @@ WORKDIR /home/static
 
 # Copy the static website
 # Use the .dockerignore file to control what ends up inside the image!
-COPY --from=build /app/dist/kilsi-world/browser .
+COPY --from=build /app/dist/kama-games-cloud/browser .
 
 # Run BusyBox httpd
 CMD ["busybox", "httpd", "-f", "-v", "-p", "5000"]

@@ -1,4 +1,4 @@
 
 export const environment = {
-  apiUrl: 'https://kamalen.duckdns.org/kilsiworld/api',
+  apiUrl: 'https://kamalen.duckdns.org/kama-games-cloud/api',
 }

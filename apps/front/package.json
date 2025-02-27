@@ -1,10 +1,10 @@
 {
-  "name": "@kilsi-world/front",
+  "name": "@kama-games-cloud/front",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "dev": "ng serve",
-    "build": "ng build --base-href=/kilsiworld/",
+    "build": "ng build --base-href=/kama-games/",
     "deploy": "ng deploy",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "watch": "ng build --watch --configuration development",
@@ -20,7 +20,7 @@
     "@angular/platform-browser": "^19.2.0-rc.0",
     "@angular/platform-browser-dynamic": "^19.2.0-rc.0",
     "@angular/router": "^19.2.0-rc.0",
-    "@kilsi-world/shared": "*",
+    "@kama-games-cloud/shared": "*",
     "@tailwindcss/postcss": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
