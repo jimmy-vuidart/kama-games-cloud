@@ -3,24 +3,18 @@ services:
 
   front:
     build:
-      dockerfile: packages/docker/Dockerfile.angular
+      dockerfile: apps/front/Dockerfile
       context: .
-      args:
-        APP: "@kama-games-cloud/front"
-        DIST: "apps/front/dist/kama-games-cloud"
-    image: kama-games-cloud-front
+    image: kama-nas:5000/kama-games-cloud-front
     container_name: kama-games-cloud-front
     ports:
       - "5000:5000"
 
   backend:
     build:
-      dockerfile: packages/docker/Dockerfile.nest
+      dockerfile: apps/backend/Dockerfile
       context: .
-      args:
-        APP: "@kama-games-cloud/backend"
-        DIST: "apps/backend"
-    image: kama-games-cloud-backend
+    image: kama-nas:5000/kama-games-cloud-backend
     container_name: kama-games-cloud-backend
     ports:
       - "3000:3000"
@@ -29,25 +23,39 @@ services:
     build:
       dockerfile: apps/nginx/Dockerfile
       context: .
-    image: kama-games-cloud-nginx
+    image: kama-nas:5000/kama-games-cloud-nginx
     container_name: kama-games-cloud-nginx
     ports:
       - "80:80"
       - "4000:4000"
     depends_on:
       - front
+      - backend
     #      - kama-games-cloud-backend
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-www:/var/www/certbot
 
+  openssl:
+    profiles:
+      - dev
+    image: alpine/openssl
+    container_name: openssl
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+    entrypoint: "/bin/sh -c 'mkdir -p /etc/letsencrypt/live/kamalen.ddns.net/ && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/letsencrypt/live/kamalen.ddns.net/privkey.pem -out /etc/letsencrypt/live/kamalen.ddns.net/fullchain.pem -subj \"/C=FR/ST=Paris/L=Paris/O=Global Security/OU=IT/CN=kamalen.ddns.net\"'"
+
   certbot:
+    profiles:
+      - prod
     image: certbot/certbot
     container_name: certbot
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'certbot certonly --webroot --webroot-path=/var/www/certbot --email tidiusff@gmail.com --agree-tos --no-eff-email -d kamalen.ddns.net'"
+    depends_on:
+      - nginx
+    entrypoint: "/bin/sh -c 'certbot certonly --webroot --webroot-path=/var/www/certbot --email tidiusff@gmail.com --agree-tos --no-eff-email -d kamalen.ddns.net -d kamalen.duckdns.org'"
 #    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --force-renewal; sleep 12h & wait $${!}; done;'"
 
 volumes:

@@ -2,7 +2,7 @@
 FROM node:22 AS base
 
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
-FROM base as turbo
+FROM base AS turbo
 RUN npm install turbo -g
 WORKDIR /app
 ARG APP
@@ -13,7 +13,7 @@ RUN turbo prune --docker $APP
 ## Etape de production
 # Install the application dependencies
 # Use the official Node.js image as the base image
-FROM base as runner
+FROM base AS runner
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -31,6 +31,6 @@ RUN turbo run build
 # Expose the application port
 EXPOSE 3000
 
-ENV DESTINATION "/app/${DIST}/dist/main"
+ENV DESTINATION="/app/${DIST}/dist/main"
 # Command to run the application
-CMD node ${DESTINATION}
+CMD ["node", "${DESTINATION}"]

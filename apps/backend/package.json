@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "node dist/main",
+    "start": "node dist/bundle/index",
     "dev": "nest start --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
@@ -14,7 +14,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/jest/bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "build": "nest build",
+    "build": "npm run build:nest && npm run build:ncc",
+    "build:nest": "nest build",
+    "build:ncc": "ncc build dist/main.js -o dist/bundle",
     "quick": "tsx quick-start.ts"
   },
   "engines": {
@@ -49,6 +51,7 @@
     "@types/wake_on_lan": "^0.0.33",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
+    "@vercel/ncc": "^0.38.3",
     "eslint": "*",
     "eslint-config-prettier": "*",
     "eslint-plugin-prettier": "*",

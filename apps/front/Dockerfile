@@ -1,21 +1,16 @@
-# Étape de build
-FROM node:20 AS build
+# /monorepo/apps/front/Dockerfile
+
+# Utilisez une image de base officielle pour servir l'application
+FROM node:22
+
+# Définissez le répertoire de travail
 WORKDIR /app
-COPY package*.json ./
-RUN npm install --force
-COPY . .
-RUN npm run build
 
-## Etape de production
-FROM busybox:1.35
-# Create a non-root user to own the files and run our server
-RUN adduser -D static
-USER static
-WORKDIR /home/static
+# Copiez les fichiers de build pré-construits
+COPY apps/front/dist/kama-games-cloud /app/dist
 
-# Copy the static website
-# Use the .dockerignore file to control what ends up inside the image!
-COPY --from=build /app/dist/kama-games-cloud/browser .
+# Exposez le port sur lequel l'application va tourner
+EXPOSE 4000
 
-# Run BusyBox httpd
-CMD ["busybox", "httpd", "-f", "-v", "-p", "5000"]
+# Commande pour démarrer l'application avec SSR
+CMD ["node", "dist/server/server.mjs"]
